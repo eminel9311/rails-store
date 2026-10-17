@@ -1,0 +1,16 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  host: <%= Rails.application.credentials.dig(:database, :host) %>
+  port: <%= Rails.application.credentials.dig(:database, :port) %>
+  username: <%= Rails.application.credentials.dig(:database, :username) %>
+  password: <%= Rails.application.credentials.dig(:database, :password) %>
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS", 5) %>
+
+development:
+  <<: *default
+  database: store_development
+
+test:
+  <<: *default
+  database: store_test
